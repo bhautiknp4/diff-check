@@ -9,16 +9,37 @@ export default function HomePage() {
   const [zip1, setZip1] = useState<File | null>(null);
   const [zip2, setZip2] = useState<File | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const handleCompare = () => {
+  const handleCompare = async () => {
     if (!zip1 || !zip2) {
       setError("Please upload both ZIP files.");
       return;
     }
-    // Store files in state or context, or use a service for upload
-    // For now, just navigate to /compare (actual upload logic will be added later)
-    router.push("/compare");
+    setError(null);
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("zip1", zip1);
+      formData.append("zip2", zip2);
+      const res = await fetch("/api/compare", {
+        method: "POST",
+        body: formData,
+      });
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Failed to compare ZIP files.");
+      }
+      const data = await res.json();
+      // Store diff result in localStorage for /compare page
+      localStorage.setItem("zipDiffResult", JSON.stringify(data.diff));
+      router.push("/compare");
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -33,9 +54,9 @@ export default function HomePage() {
         <button
           className="w-full py-3 px-6 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded transition-colors disabled:opacity-50"
           onClick={handleCompare}
-          disabled={!zip1 || !zip2}
+          disabled={!zip1 || !zip2 || loading}
         >
-          Compare
+          {loading ? "Comparing..." : "Compare"}
         </button>
       </div>
       <footer className="mt-10 text-gray-400 text-sm">MIT Licensed. Built with Next.js & Tailwind CSS.</footer>
