@@ -86,7 +86,6 @@ export default function HomePage() {
         return (
             <div className="h-screen flex flex-col">
                 {/* Header */}
-                <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
                 <div className="flex items-center justify-between p-4 bg-white dark:bg-blue-900 border-b border-indigo-200 dark:border-blue-700">
                     <div className="flex items-center space-x-4">
                         <h1 className="text-xl font-bold text-indigo-900 dark:text-blue-100">
