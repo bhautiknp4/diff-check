@@ -12,8 +12,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: ['zip/setFiles', 'zip/setProgress'],
-        ignoredPaths: ['zip.files'],
+        ignoredActions: ['zip/setFiles', 'zip/setProgress', 'zip/setUploadedFile'],
+        ignoredPaths: ['zip.files', 'zip.uploadedFiles'],
       },
     }),
 });
