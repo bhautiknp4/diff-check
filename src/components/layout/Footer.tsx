@@ -7,34 +7,34 @@ import { HeartIcon } from '@heroicons/react/24/solid';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-slate-50 dark:bg-slate-900 border-t border-slate-200 dark:border-slate-700">
+    <footer className="bg-indigo-50 dark:bg-blue-900 border-t border-indigo-200 dark:border-blue-800">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-slate-900 dark:text-slate-100">
+            <h3 className="text-lg font-bold text-indigo-900 dark:text-blue-100">
               Diff Check
             </h3>
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-indigo-700 dark:text-blue-300">
               Professional ZIP file comparison tool with beautiful visual diffs.
             </p>
           </div>
 
           {/* Links */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-slate-900 dark:text-slate-100">
+            <h4 className="font-semibold text-indigo-900 dark:text-blue-100">
               Product
             </h4>
             <div className="space-y-2">
               <Link 
                 href="/app" 
-                className="block text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="block text-sm text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
               >
                 Compare Files
               </Link>
               <Link 
                 href="/#features" 
-                className="block text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="block text-sm text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
               >
                 Features
               </Link>
@@ -43,7 +43,7 @@ const Footer: React.FC = () => {
 
           {/* Resources */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-slate-900 dark:text-slate-100">
+            <h4 className="font-semibold text-indigo-900 dark:text-blue-100">
               Resources
             </h4>
             <div className="space-y-2">
@@ -51,7 +51,7 @@ const Footer: React.FC = () => {
                 href="https://github.com/udaypankhaniya/diff-check" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="block text-sm text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
               >
                 GitHub
               </a>
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
                 href="https://github.com/udaypankhaniya/diff-check/issues" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="block text-sm text-slate-600 dark:text-slate-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="block text-sm text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
               >
                 Report Issues
               </a>
@@ -68,28 +68,28 @@ const Footer: React.FC = () => {
 
           {/* Legal */}
           <div className="space-y-4">
-            <h4 className="font-semibold text-slate-900 dark:text-slate-100">
+            <h4 className="font-semibold text-indigo-900 dark:text-blue-100">
               Legal
             </h4>
             <div className="space-y-2">
-              <span className="block text-sm text-slate-600 dark:text-slate-400">
+              <span className="block text-sm text-indigo-600 dark:text-blue-300">
                 MIT License
               </span>
-              <span className="block text-sm text-slate-600 dark:text-slate-400">
+              <span className="block text-sm text-indigo-600 dark:text-blue-300">
                 Open Source
               </span>
             </div>
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-slate-200 dark:border-slate-700">
+        <div className="mt-8 pt-8 border-t border-indigo-200 dark:border-blue-800">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-            <p className="text-sm text-slate-600 dark:text-slate-400">
+            <p className="text-sm text-indigo-600 dark:text-blue-300">
               © {new Date().getFullYear()} Diff Check. All rights reserved.
             </p>
             
             <motion.div 
-              className="flex items-center space-x-1 text-sm text-slate-600 dark:text-slate-400"
+              className="flex items-center space-x-1 text-sm text-indigo-600 dark:text-blue-300"
               whileHover={{ scale: 1.05 }}
             >
               <span>Made with</span>
@@ -104,7 +104,7 @@ const Footer: React.FC = () => {
                 href="https://github.com/udaypankhaniya" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="font-medium hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                className="font-medium hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
               >
                 Uday Pankhaniya
               </a>

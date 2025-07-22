@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-700"
+      className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-indigo-200 dark:border-blue-800"
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">
@@ -33,7 +33,7 @@ const Navbar: React.FC = () => {
             >
               <DocumentMagnifyingGlassIcon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
             </motion.div>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 bg-clip-text text-transparent">
               Diff Check
             </span>
           </Link>
@@ -42,13 +42,13 @@ const Navbar: React.FC = () => {
           <div className="hidden md:flex items-center space-x-6">
             <Link 
               href="/" 
-              className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
             >
               Home
             </Link>
             <Link 
               href="/app" 
-              className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
             >
               Compare
             </Link>
@@ -56,7 +56,7 @@ const Navbar: React.FC = () => {
               href="https://github.com/udaypankhaniya/diff-check" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="text-slate-600 dark:text-slate-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+              className="text-indigo-600 dark:text-blue-300 hover:text-indigo-700 dark:hover:text-blue-400 transition-colors"
             >
               GitHub
             </a>

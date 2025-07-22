@@ -14,26 +14,26 @@ const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
     <div className="flex flex-col items-center justify-center p-8 space-y-4">
       <div className="relative">
         <motion.div
-          className="w-16 h-16 border-4 border-blue-200 dark:border-blue-800 rounded-full"
+          className="w-16 h-16 border-4 border-indigo-200 dark:border-blue-800 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
         <motion.div
-          className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-blue-600 rounded-full"
+          className="absolute top-0 left-0 w-16 h-16 border-4 border-transparent border-t-indigo-600 rounded-full"
           animate={{ rotate: 360 }}
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
         />
       </div>
       
       <div className="text-center space-y-2">
-        <p className="text-sm font-medium text-slate-700 dark:text-slate-300">
+        <p className="text-sm font-medium text-indigo-700 dark:text-blue-300">
           {message}
         </p>
         
         {progress !== undefined && (
-          <div className="w-48 bg-slate-200 dark:bg-slate-700 rounded-full h-2">
+          <div className="w-48 bg-indigo-200 dark:bg-blue-700 rounded-full h-2">
             <motion.div
-              className="bg-blue-600 h-2 rounded-full"
+              className="bg-indigo-600 h-2 rounded-full"
               initial={{ width: 0 }}
               animate={{ width: `${progress}%` }}
               transition={{ duration: 0.3 }}

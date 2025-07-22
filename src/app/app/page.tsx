@@ -87,11 +87,12 @@ export default function HomePage() {
             <div className="h-screen flex flex-col">
                 {/* Header */}
                 <div className="flex items-center justify-between p-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700">
+                <div className="flex items-center justify-between p-4 bg-white dark:bg-blue-900 border-b border-indigo-200 dark:border-blue-700">
                     <div className="flex items-center space-x-4">
-                        <h1 className="text-xl font-bold text-slate-900 dark:text-slate-100">
+                        <h1 className="text-xl font-bold text-indigo-900 dark:text-blue-100">
                             ZIP Comparison Results
                         </h1>
-                        <div className="flex items-center space-x-2 text-sm text-slate-600 dark:text-slate-400">
+                        <div className="flex items-center space-x-2 text-sm text-indigo-600 dark:text-blue-300">
                             <span>{uploadedFiles.zip1?.name}</span>
                             <span>vs</span>
                             <span>{uploadedFiles.zip2?.name}</span>
@@ -117,7 +118,7 @@ export default function HomePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-indigo-100 dark:from-blue-900 dark:via-blue-800 dark:to-indigo-900">
             <div className="container mx-auto px-4 py-12">
                 {/* Header */}
                 <motion.div
@@ -125,10 +126,10 @@ export default function HomePage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-12"
                 >
-                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-600 bg-clip-text text-transparent mb-4">
+                    <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-600 bg-clip-text text-transparent mb-4">
                         Compare ZIP Files
                     </h1>
-                    <p className="text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+                    <p className="text-lg text-indigo-600 dark:text-blue-300 max-w-2xl mx-auto">
                         Upload two ZIP files to see a detailed comparison with visual diffs, file trees, and change summaries.
                     </p>
                 </motion.div>
@@ -139,7 +140,7 @@ export default function HomePage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="max-w-4xl mx-auto"
                 >
-                    <div className="bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-slate-200 dark:border-slate-700 p-8">
+                    <div className="bg-white/80 dark:bg-blue-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-indigo-200 dark:border-blue-700 p-8">
                         {isLoading ? (
                             <LoadingSpinner
                                 message={zipLoading ? "Processing ZIP files..." : "Generating diff..."}
@@ -167,7 +168,7 @@ export default function HomePage() {
                                         onClick={handleCompare}
                                         disabled={!canCompare}
                                         size="lg"
-                                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
+                                        className="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white shadow-lg hover:shadow-xl transition-all duration-200"
                                     >
                                         Compare Files
                                     </Button>
@@ -177,7 +178,7 @@ export default function HomePage() {
                                             onClick={handleReset}
                                             variant="outline"
                                             size="lg"
-                                            className="border-slate-300 dark:border-slate-600"
+                                            className="border-indigo-300 dark:border-blue-600"
                                         >
                                             <ArrowPathIcon className="w-5 h-5 mr-2" />
                                             Reset
@@ -186,24 +187,24 @@ export default function HomePage() {
                                 </div>
 
                                 <div className="mt-8 bg-blue-50 dark:bg-blue-950/50 rounded-lg p-6 border border-blue-200 dark:border-blue-800">
-                                    <h3 className="font-semibold text-blue-900 dark:text-blue-100 mb-3">
+                                    <h3 className="font-semibold text-indigo-900 dark:text-blue-100 mb-3">
                                         Supported Features:
                                     </h3>
-                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-blue-800 dark:text-blue-200">
+                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-indigo-800 dark:text-blue-200">
                                         <li className="flex items-center">
-                                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-3" />
+                                            <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
                                             Text file diff visualization
                                         </li>
                                         <li className="flex items-center">
-                                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-3" />
+                                            <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
                                             Binary file comparison
                                         </li>
                                         <li className="flex items-center">
-                                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-3" />
+                                            <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
                                             Directory structure analysis
                                         </li>
                                         <li className="flex items-center">
-                                            <span className="w-2 h-2 bg-blue-500 rounded-full mr-3" />
+                                            <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
                                             Syntax highlighting
                                         </li>
                                     </ul>

@@ -60,11 +60,11 @@ const FileUploadZone: React.FC<FileUploadZoneProps> = ({
       <div
         className={cn(
           "relative border-2 border-dashed rounded-xl p-6 transition-all duration-300 cursor-pointer",
-          "bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-900",
-          isDragOver && !disabled && "border-blue-500 bg-blue-50 dark:bg-blue-950/50 scale-105",
-          !isDragOver && !disabled && "border-slate-300 dark:border-slate-600 hover:border-blue-400 dark:hover:border-blue-500",
+          "bg-gradient-to-br from-indigo-50 to-lavender-100 dark:from-blue-800 dark:to-blue-900",
+          isDragOver && !disabled && "border-indigo-500 bg-indigo-50 dark:bg-blue-950/50 scale-105",
+          !isDragOver && !disabled && "border-indigo-300 dark:border-blue-600 hover:border-indigo-400 dark:hover:border-blue-500",
           file && "border-green-500 bg-green-50 dark:bg-green-950/50",
-          disabled && "opacity-50 cursor-not-allowed border-slate-200 dark:border-slate-700"
+          disabled && "opacity-50 cursor-not-allowed border-indigo-200 dark:border-blue-700"
         )}
         onClick={() => !disabled && inputRef.current?.click()}
         onDrop={handleDrop}
@@ -96,10 +96,10 @@ const FileUploadZone: React.FC<FileUploadZoneProps> = ({
                 <DocumentIcon className="w-8 h-8 text-green-600" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-medium text-slate-900 dark:text-slate-100 truncate">
+                <p className="text-sm font-medium text-indigo-900 dark:text-blue-100 truncate">
                   {file.name}
                 </p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">
+                <p className="text-xs text-indigo-600 dark:text-blue-300">
                   {formatFileSize(file.size)}
                 </p>
               </div>
@@ -122,12 +122,12 @@ const FileUploadZone: React.FC<FileUploadZoneProps> = ({
                 animate={isDragOver ? { scale: 1.1, rotate: 5 } : { scale: 1, rotate: 0 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <CloudArrowUpIcon className="mx-auto w-12 h-12 text-slate-400 dark:text-slate-500 mb-3" />
+                <CloudArrowUpIcon className="mx-auto w-12 h-12 text-indigo-400 dark:text-blue-500 mb-3" />
               </motion.div>
-              <h3 className="text-sm font-medium text-slate-900 dark:text-slate-100 mb-1">
+              <h3 className="text-sm font-medium text-indigo-900 dark:text-blue-100 mb-1">
                 {label}
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-xs text-indigo-600 dark:text-blue-300">
                 Drag & drop or click to select ZIP file
               </p>
             </motion.div>

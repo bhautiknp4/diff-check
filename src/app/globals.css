@@ -2,24 +2,24 @@
 
 :root {
   --background: #f8fafc;
-  --foreground: #1e293b;
+  --foreground: #1e1b4b;
   --card: #ffffffcc;
-  --card-foreground: #1e293b;
+  --card-foreground: #1e1b4b;
   --popover: #ffffffcc;
-  --popover-foreground: #1e293b;
-  --primary: #1d4ed8;
+  --popover-foreground: #1e1b4b;
+  --primary: #4f46e5;
   --primary-foreground: #ffffff;
-  --secondary: #e2e8f0;
-  --secondary-foreground: #1e293b;
-  --muted: #f1f5f9;
-  --muted-foreground: #64748b;
-  --accent: #dbeafe;
-  --accent-foreground: #1e293b;
+  --secondary: #e0e7ff;
+  --secondary-foreground: #1e1b4b;
+  --muted: #e0e7ff;
+  --muted-foreground: #1e1b4b;
+  --accent: #e0e7ff;
+  --accent-foreground: #1e1b4b;
   --destructive: #dc2626;
   --destructive-foreground: #ffffff;
-  --border: #e5e7eb;
-  --input: #e5e7eb;
-  --ring: #1d4ed8;
+  --border: #c7d2fe;
+  --input: #c7d2fe;
+  --ring: #4f46e5;
   --radius: 0.75rem;
   --success: #15803d;
   --success-foreground: #ffffff;
@@ -56,28 +56,28 @@
 }
 
 .dark {
-  --background: #0f172a;
-  --foreground: #e2e8f0;
-  --card: #1e293bcc;
-  --card-foreground: #e2e8f0;
-  --popover: #1e293bcc;
-  --popover-foreground: #e2e8f0;
-  --primary: #3b82f6;
+  --background: #0b132b;
+  --foreground: #dbeafe;
+  --card: #1e3a8acc;
+  --card-foreground: #dbeafe;
+  --popover: #1e3a8acc;
+  --popover-foreground: #dbeafe;
+  --primary: #60a5fa;
   --primary-foreground: #ffffff;
-  --secondary: #475569;
-  --secondary-foreground: #f8fafc;
-  --muted: #334155;
-  --muted-foreground: #94a3b8;
-  --accent: #1e40af;
-  --accent-foreground: #f8fafc;
+  --secondary: #1e3a8a;
+  --secondary-foreground: #dbeafe;
+  --muted: #1e3a8a;
+  --muted-foreground: #dbeafe;
+  --accent: #1e3a8a;
+  --accent-foreground: #dbeafe;
   --destructive: #b91c1c;
   --destructive-foreground: #ffffff;
-  --border: #475569;
-  --input: #475569;
-  --ring: #3b82f6;
+  --border: #1e3a8a;
+  --input: #1e3a8a;
+  --ring: #60a5fa;
   --success: #16a34a;
   --success-foreground: #ffffff;
-  --warning: #f59e0b;
+  --warning: #fbbf24;
   --warning-foreground: #ffffff;
 }
 
