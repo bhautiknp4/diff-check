@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
     <motion.nav
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="sticky top-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-indigo-200 dark:border-blue-800"
+      className="sticky top-0 z-50 bg-white/95 dark:bg-slate-800/95 backdrop-blur-md border-b border-gray-200 dark:border-slate-600"
     >
       <div className="container mx-auto px-4 py-3">
         <div className="flex items-center justify-between">

@@ -117,7 +117,7 @@ export default function HomePage() {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-blue-50 to-indigo-100 dark:from-blue-900 dark:via-blue-800 dark:to-indigo-900">
+        <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900">
             <div className="container mx-auto px-4 py-12">
                 {/* Header */}
                 <motion.div
@@ -139,7 +139,7 @@ export default function HomePage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="max-w-4xl mx-auto"
                 >
-                    <div className="bg-white/80 dark:bg-blue-800/80 backdrop-blur-sm rounded-2xl shadow-2xl border border-indigo-200 dark:border-blue-700 p-8">
+                    <div className="bg-white/90 dark:bg-slate-800/90 backdrop-blur-sm rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-600 p-8">
                         {isLoading ? (
                             <LoadingSpinner
                                 message={zipLoading ? "Processing ZIP files..." : "Generating diff..."}
@@ -177,7 +177,7 @@ export default function HomePage() {
                                             onClick={handleReset}
                                             variant="outline"
                                             size="lg"
-                                            className="border-indigo-300 dark:border-blue-600"
+                                            className="border-gray-300 dark:border-slate-600"
                                         >
                                             <ArrowPathIcon className="w-5 h-5 mr-2" />
                                             Reset
@@ -189,7 +189,7 @@ export default function HomePage() {
                                     <h3 className="font-semibold text-indigo-900 dark:text-blue-100 mb-3">
                                         Supported Features:
                                     </h3>
-                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-indigo-800 dark:text-blue-200">
+                                    <ul className="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-slate-700 dark:text-slate-300">
                                         <li className="flex items-center">
                                             <span className="w-2 h-2 bg-indigo-500 rounded-full mr-3" />
                                             Text file diff visualization
