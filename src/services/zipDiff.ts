@@ -5,6 +5,7 @@ export type FileEntry = {
   path: string;
   isDir: boolean;
   content?: string; // Only for text files
+  size?: number;
 };
 
 export type DiffResult = {
@@ -13,58 +14,84 @@ export type DiffResult = {
   modified: string[];
   unchanged: string[];
   diffs: Record<string, string>; // path -> unified diff for modified files
+  stats: {
+    totalFiles: number;
+    addedCount: number;
+    removedCount: number;
+    modifiedCount: number;
+    unchangedCount: number;
+  };
 };
 
 const TEXT_FILE_EXTENSIONS = [
-  ".txt",
-  ".md",
-  ".json",
-  ".html",
-  ".js",
-  ".ts",
-  ".css",
-  ".tsx",
-  ".jsx",
+  ".txt", ".md", ".json", ".html", ".js", ".ts", ".css", ".tsx", ".jsx",
+  ".py", ".java", ".cpp", ".c", ".h", ".php", ".rb", ".go", ".rs", ".swift",
+  ".kt", ".scala", ".sh", ".bat", ".ps1", ".yml", ".yaml", ".xml", ".sql",
+  ".dockerfile", ".gitignore", ".env", ".config", ".ini", ".toml", ".lock"
 ];
 
 function normalizePath(path: string): string {
-  // Replace backslashes with forward slashes and remove leading/trailing slashes
+  // More robust path normalization
   return path
-    .replace(/\\/g, "/")
-    .replace(/^\/+|\/+$/g, "")
-    .toLowerCase();
+    .replace(/\\/g, "/") // Convert backslashes to forward slashes
+    .replace(/\/+/g, "/") // Replace multiple slashes with single slash
+    .replace(/^\/+/, "") // Remove leading slashes
+    .replace(/\/+$/, "") // Remove trailing slashes
+    .trim(); // Remove whitespace
 }
 
 function isTextFile(filename: string): boolean {
   const lowerFilename = filename.toLowerCase();
-  return TEXT_FILE_EXTENSIONS.some((ext) => lowerFilename.endsWith(ext));
+  return TEXT_FILE_EXTENSIONS.some((ext) => lowerFilename.endsWith(ext)) ||
+         !filename.includes('.'); // Files without extension are often text
 }
 
 export async function extractZipEntries(
-  file: File | Buffer
+  buffer: ArrayBuffer
 ): Promise<FileEntry[]> {
   try {
-    const zip = await JSZip.loadAsync(file);
+    const zip = await JSZip.loadAsync(buffer);
     const entries: FileEntry[] = [];
 
     for (const [path, entry] of Object.entries(zip.files)) {
       try {
         const normalizedPath = normalizePath(path);
+        
+        // Skip empty paths or root directory
+        if (!normalizedPath || normalizedPath === "/") continue;
+
         if (entry.dir) {
-          entries.push({ path: normalizedPath, isDir: true });
+          entries.push({ 
+            path: normalizedPath, 
+            isDir: true,
+            size: 0
+          });
         } else {
           let content: string | undefined = undefined;
-          if (isTextFile(normalizedPath)) {
-            content = await entry.async("text");
+          const size = entry._data?.uncompressedSize || 0;
+          
+          // Only read content for text files under 1MB
+          if (isTextFile(normalizedPath) && size < 1024 * 1024) {
+            try {
+              content = await entry.async("text");
+            } catch (error) {
+              console.warn(`Failed to read text content for ${normalizedPath}:`, error);
+            }
           }
-          entries.push({ path: normalizedPath, isDir: false, content });
+          
+          entries.push({ 
+            path: normalizedPath, 
+            isDir: false, 
+            content,
+            size
+          });
         }
       } catch (error) {
         console.warn(`Failed to process file ${path}:`, error);
       }
     }
 
-    return entries;
+    return entries.sort((a, b) => a.path.localeCompare(b.path));
   } catch (error) {
     throw new Error(
       `Failed to load ZIP file: ${
@@ -78,7 +105,7 @@ export function compareZipEntries(
   left: FileEntry[],
   right: FileEntry[]
 ): DiffResult {
-  // Create maps with normalized paths
+  // Create maps with normalized paths for faster lookup
   const leftMap = new Map(left.map((f) => [f.path, f]));
   const rightMap = new Map(right.map((f) => [f.path, f]));
 
@@ -88,24 +115,25 @@ export function compareZipEntries(
   const unchanged: string[] = [];
   const diffs: Record<string, string> = {};
 
-  // Debugging: Log all paths to verify normalization
-  console.log("Left ZIP paths:", Array.from(leftMap.keys()));
-  console.log("Right ZIP paths:", Array.from(rightMap.keys()));
+  // Get all unique paths from both ZIPs
+  const allPaths = new Set([...leftMap.keys(), ...rightMap.keys()]);
 
-  // Compare files from right (new) ZIP
-  for (const [path, rightEntry] of rightMap.entries()) {
-    if (!leftMap.has(path)) {
-      if (rightEntry.isDir) {
-        added.push(path); // Track added directories
-      } else if (isTextFile(path)) {
-        added.push(path);
-      }
-    } else {
-      const leftEntry = leftMap.get(path)!;
+  for (const path of allPaths) {
+    const leftEntry = leftMap.get(path);
+    const rightEntry = rightMap.get(path);
+
+    if (!leftEntry && rightEntry) {
+      // File exists only in right ZIP (added)
+      added.push(path);
+    } else if (leftEntry && !rightEntry) {
+      // File exists only in left ZIP (removed)
+      removed.push(path);
+    } else if (leftEntry && rightEntry) {
+      // File exists in both ZIPs
       if (leftEntry.isDir !== rightEntry.isDir) {
         // Type changed (file <-> directory)
+        modified.push(path);
         if (isTextFile(path)) {
-          modified.push(path);
           diffs[path] = createTwoFilesPatch(
             path,
             path,
@@ -115,32 +143,49 @@ export function compareZipEntries(
             "ZIP 2"
           );
         }
-      } else if (!leftEntry.isDir && isTextFile(path)) {
-        if (leftEntry.content !== rightEntry.content) {
+      } else if (!leftEntry.isDir && !rightEntry.isDir) {
+        // Both are files - compare content
+        if (isTextFile(path) && leftEntry.content !== undefined && rightEntry.content !== undefined) {
+          if (leftEntry.content !== rightEntry.content) {
+            modified.push(path);
+            diffs[path] = createTwoFilesPatch(
+              path,
+              path,
+              leftEntry.content,
+              rightEntry.content,
+              "ZIP 1",
+              "ZIP 2"
+            );
+          } else {
+            unchanged.push(path);
+          }
+        } else if (leftEntry.size !== rightEntry.size) {
+          // For binary files, compare by size
           modified.push(path);
-          diffs[path] = createTwoFilesPatch(
-            path,
-            path,
-            leftEntry.content || "",
-            rightEntry.content || "",
-            "ZIP 1",
-            "ZIP 2"
-          );
         } else {
           unchanged.push(path);
         }
+      } else {
+        // Both are directories
+        unchanged.push(path);
       }
     }
   }
 
-  // Check for removed files or directories
-  for (const [path, leftEntry] of leftMap.entries()) {
-    if (!rightMap.has(path)) {
-      if (leftEntry.isDir || isTextFile(path)) {
-        removed.push(path);
-      }
-    }
-  }
+  const stats = {
+    totalFiles: allPaths.size,
+    addedCount: added.length,
+    removedCount: removed.length,
+    modifiedCount: modified.length,
+    unchangedCount: unchanged.length,
+  };
 
-  return { added, removed, modified, unchanged, diffs };
+  return { 
+    added: added.sort(), 
+    removed: removed.sort(), 
+    modified: modified.sort(), 
+    unchanged: unchanged.sort(), 
+    diffs, 
+    stats 
+  };
 }

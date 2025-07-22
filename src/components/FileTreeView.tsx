@@ -85,6 +85,7 @@ const FileTreeView: React.FC<{
     selected: string | null;
 }> = ({ files, onSelect, selected }) => {
     const tree = buildTree(files);
+    
     return (
         <div className="text-xs font-mono">
             {tree.map(node =>

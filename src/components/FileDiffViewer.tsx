@@ -43,16 +43,15 @@ const parseDiff = (diff: string): DiffLine[] => {
 const getLineClass = (type: DiffLine["type"]) => {
     switch (type) {
         case "added":
-            return "bg-green-50 dark:bg-green-900/30 text-green-700 dark:text-green-300";
+            return "bg-[rgba(var(--success),0.1)] text-[var(--success)]";
         case "removed":
-            return "bg-red-50 dark:bg-red-900/30 text-red-700 dark:text-red-300";
+            return "bg-[rgba(var(--destructive),0.1)] text-[var(--destructive)]";
         case "context":
-            return "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 font-mono";
+            return "bg-[rgba(var(--primary),0.1)] text-[var(--primary)] font-mono";
         default:
-            return "text-gray-700 dark:text-gray-200";
+            return "text-[var(--foreground)]";
     }
 };
-
 const FileDiffViewer: React.FC<FileDiffViewerProps> = ({ diff }) => {
     if (!diff) return <div className="italic text-gray-400 text-center p-4">No diff available.</div>;
 
